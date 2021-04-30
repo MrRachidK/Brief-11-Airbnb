@@ -13,6 +13,7 @@
 │       ├── cleaned_listings.csv
 │       └── cleaned_reviews.csv
 ├── notebook
+│   └──data_visualization.ipynb
 ├── src
 │   ├── __init__.py
 │   ├── data.analyze.py
