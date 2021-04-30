@@ -39,7 +39,7 @@ calendar_data = calendar_data[key_cols_calendar_data]
 
 # b. listings_data
 
-key_cols_listings_data = ['id', 'host_id', 'host_name', 'host_is_superhost', 'host_listings_count', 'neighbourhood_cleansed', 'latitude', 'longitude', 'property_type', 'room_type', 'accommodates', 'bathrooms_text', 'bedrooms', 'beds', 'price', 'minimum_nights', 'maximum_nights', 'has_availability', 'availability_365', 'number_of_reviews', 'review_scores_rating', 'reviews_per_month']
+key_cols_listings_data = ['id', 'host_id', 'host_name', 'host_response_time', 'host_response_rate', 'host_is_superhost', 'host_listings_count', 'neighbourhood_cleansed', 'latitude', 'longitude', 'property_type', 'room_type', 'accommodates', 'bathrooms_text', 'bedrooms', 'beds', 'price', 'minimum_nights', 'maximum_nights', 'has_availability', 'availability_365', 'number_of_reviews', 'review_scores_rating', 'review_scores_accuracy', 'review_scores_cleanliness', 'review_scores_checkin', 'review_scores_communication', 'review_scores_location', 'review_scores_value', 'reviews_per_month']
 listings_data = listings_data[key_cols_listings_data]
 
 # c. reviews_data
@@ -91,8 +91,14 @@ listings_data['host_listings_count'] = listings_data['host_listings_count'].fill
 listings_data['bathrooms_text'] = listings_data['bathrooms_text'].fillna('Not specified')
 listings_data['bedrooms'] = listings_data['bedrooms'].fillna(method='bfill')
 listings_data['beds'] = listings_data['beds'].fillna(method='bfill')
-listings_data['review_scores_rating'] = listings_data['review_scores_rating'].fillna(listings_data['review_scores_rating'].mean())
-listings_data['reviews_per_month'] = listings_data['reviews_per_month'].fillna(listings_data['reviews_per_month'].mean())
+# listings_data['review_scores_rating'] = listings_data['review_scores_rating'].fillna(listings_data['review_scores_rating'].mean())
+# listings_data['review_scores_accuracy'] = listings_data['review_scores_accuracy'].fillna(listings_data['review_scores_accuracy'].mean())
+# listings_data['review_scores_cleanliness'] = listings_data['review_scores_cleanliness'].fillna(listings_data['review_scores_cleanliness'].mean())
+# listings_data['review_scores_checkin'] = listings_data['review_scores_checkin'].fillna(listings_data['review_scores_checkin'].mean())
+# listings_data['review_scores_communication'] = listings_data['review_scores_communication'].fillna(listings_data['review_scores_communication'].mean())
+# listings_data['review_scores_location'] = listings_data['review_scores_location'].fillna(listings_data['review_scores_location'].mean())
+# listings_data['review_scores_value'] = listings_data['review_scores_value'].fillna(listings_data['review_scores_value'].mean())
+# listings_data['reviews_per_month'] = listings_data['reviews_per_month'].fillna(listings_data['reviews_per_month'].mean())
 
 # 7. Handle the types of our variables
 
@@ -104,6 +110,7 @@ separator()
 
 # b. listings_data
 
+listings_data['host_response_rate'] = pd.to_numeric(listings_data['host_response_rate'].str.strip('%'))
 listings_data['price'] = listings_data['price'].str.replace('$', '')
 listings_data['price'] = listings_data['price'].str.replace(',', '')
 listings_data['price'] = listings_data['price'].astype(float)
@@ -112,6 +119,7 @@ separator()
 
 # c. reviews_data
 
+reviews_data['date'] = pd.to_datetime(reviews_data['date'])
 print(reviews_data.dtypes)
 separator()
 
