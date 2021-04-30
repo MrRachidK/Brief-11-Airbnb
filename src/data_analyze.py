@@ -45,6 +45,7 @@ listings_data = listings_data[key_cols_listings_data]
 # c. reviews_data
 
 key_cols_reviews_data = ['listing_id', 'id', 'date', 'reviewer_id', 'reviewer_name']
+reviews_data = reviews_data[key_cols_reviews_data]
 
 # 3. Checking of the duplicated values
 
